@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
           "https://drive.google.com/drive/folders/1pzaP4dMcxzXxGZ_msXGhtHN_p5q4u2tg?usp=sharing",
         permanent: false,
       },
+      {
+        source: "/be723",
+        destination:
+          "https://drive.google.com/drive/folders/1NIQmYw2XwMp7zCTQFc2J3N-9i9hg-13L?usp=sharing",
+        permanent: false,
+      }
     ];
   },
 };
