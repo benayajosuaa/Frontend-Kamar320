@@ -16,11 +16,11 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        source: "/cheatsheet-wdk3",
+        source: "/gpt/olipiarachel",
         destination:
-          "https://uph365-my.sharepoint.com/:f:/g/personal/01082240013_student_uph_edu/IgAuktWUK_-JS6Icr7tFbhQ-AWaMU_5Zsc0vTlnBIbqG1zs?e=zakJau",
+          "https://chatgpt.com/g/g-p-6a0b0d2f05108191896823fe29aa785e-tugas-adek-olip/project",
         permanent: false,
-      }
+      },
     ];
   },
 };
