@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
           "https://chatgpt.com/g/g-p-6a0b0d2f05108191896823fe29aa785e-tugas-adek-olip/project",
         permanent: false,
       },
+      {
+        source: "/gpt/shandthebear",
+        destination:
+          "https://chatgpt.com/g/g-p-69e9a76a8ae48191a248cf816486084c-nashanya-haechan-3/project",
+        permanent: false,
+      },
     ];
   },
 };
