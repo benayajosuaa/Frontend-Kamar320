@@ -27,6 +27,12 @@ const nextConfig: NextConfig = {
           "https://chatgpt.com/g/g-p-69e9a76a8ae48191a248cf816486084c-nashanya-haechan-3/project",
         permanent: false,
       },
+      {
+        source: "/gpt/learnify-rahel",
+        destination:
+          "https://chatgpt.com/g/g-p-6a0e8c3431c0819185d27d544b72df65-rahel/project",
+        permanent: false,
+      },
     ];
   },
 };
