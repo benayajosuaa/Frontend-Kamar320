@@ -33,6 +33,12 @@ const nextConfig: NextConfig = {
           "https://chatgpt.com/g/g-p-6a0e8c3431c0819185d27d544b72df65-rahel/project",
         permanent: false,
       },
+      {
+        source: "/cheatsheet-wdk3",
+        destination:
+          "https://drive.google.com/drive/folders/1_fPiQXRvPOBbIGQA7rXfytZXa98BbUk0?usp=sharing",
+        permanent: false,
+      },
     ];
   },
 };
