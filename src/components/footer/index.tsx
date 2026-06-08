@@ -56,7 +56,7 @@ export default function NavigationBar() {
                                     </div>
                                     <div className="pl-5 p-2  col-span-3 flex h-11 items-center  border-r  border-l border-[#ffffff] px-1">
                                         <p className="text-lg">
-                                            info.kamar320@gmail.com
+                                            information@kamar320.com
                                         </p>
                                     </div>
                                     <div className="bg-transparent h-11 border-0"/>
