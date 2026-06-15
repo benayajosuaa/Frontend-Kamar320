@@ -15,14 +15,22 @@ const quesFont = Questrial({
 const listWork = [
     {   
         index:1,
-        title:"Photoscape",
+        title:"Company Profile - CV Terang Berkat Mandiri",
+        gambar:"work/tbm.png",
+        link_demo:"https://terang-berkat-mandiri.vercel.app",
+        magazine:"/under-development",
+        type:"Website"
+    },
+    {   
+        index:2,
+        title:"Photoscape - Online Booking Studio",
         gambar:"work/photoscape.png",
         link_demo:"https://photoscape-frontend.vercel.app/",
         magazine:"/under-development",
         type:"Website"
     },
     {
-        index:2,
+        index:3,
         title:"Personal Portfolio",
         gambar:"work/haloben.png",
         link_demo:"https://www.halobenaya.com/",
@@ -30,7 +38,7 @@ const listWork = [
         type:"Website"
     },
     {
-        index:3,
+        index:4,
         title:"Vector Database for Recipe",
         gambar:"work/sbd.png",
         link_demo:"/under-development",
