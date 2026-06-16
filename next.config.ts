@@ -34,9 +34,9 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        source: "/cheatsheet-wdk3",
+        source: "/card",
         destination:
-          "https://drive.google.com/drive/folders/1_fPiQXRvPOBbIGQA7rXfytZXa98BbUk0?usp=sharing",
+          "https://card-rho-lyart.vercel.app/",
         permanent: false,
       },
     ];
