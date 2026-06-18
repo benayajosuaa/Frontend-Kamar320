@@ -43,33 +43,33 @@ type ProjectSelesai = {
 const dalam_pengerjaan: ProjectBerjalan[] = [
     {
         id: "1",
-        namaProject: "FullstackKamar320",
-        ringkasanProject: "untuk memudahkan penggunaan website kamar320, maka untuk saat ini sedang dilakukan penyempurnaan website dengan menambahkan backend pada keseluruhan web ",
-        pemilikProject: "Benaya Simamora",
-        status: "dalam pengerjaan",
+        namaProject: "Manten - Wedding Organizer Web",
+        ringkasanProject: "direncakan sebagai website booking jasa wedding organizer yang interaktif dan diharapkan bisa membantu para WO dalam mengelola pengerjaan jasanya",
+        pemilikProject: "ben",
+        status: "dalam perancangan konsep & design",
         dimulaiLabel: "dimulai:",
-        dimulai: "April 30, 2026",
+        dimulai: "Juni 18, 2026",
         estimasiLabel: "estimasi:",
         estimasi: "July 2026",
         progressProject: "23 %",
         gambarClassName: "h-56 w-full overflow-hidden rounded-sm bg-green-500 sm:h-64 md:h-72 lg:h-75 lg:w-auto",
-        image:"work/kamar320.png"
+        image:"home/manten.png"
     },
 ];
 
 const project_mendatang: ProjectBerjalan[] = [
     {
         id: "1",
-        namaProject: "belum tau nih....",
-        ringkasanProject: "kalau kamu ada ide yang bisa diberikan untuk project selanjutnya, jangan sungkan-sungkan untuk langsung beri ide ya",
-        pemilikProject: "-",
-        status: "belum kepikiran",
+        namaProject: "Wanatea - Wanna Tea untuk hari ini ?",
+        ringkasanProject: "Website booking minuman Milk Tea yang bisa di integrasikan ke dalam pembayaran (kalau berhasil wkwkwk)",
+        pemilikProject: "ben",
+        status: "terjadwal untuk dikerjakan",
         dimulaiLabel: "rencana mulai:",
-        dimulai: "-",
+        dimulai: "Juli 2026",
         estimasiLabel: "target:",
-        estimasi: "-",
+        estimasi: "Agustus 2026",
         gambarClassName: "h-56 w-full overflow-hidden rounded-sm bg-[#e8dff0] sm:h-64 md:h-72 lg:h-75 lg:w-auto",
-        image:"home/cs.png"
+        image:"home/wnt.png"
     },
 ];
 
