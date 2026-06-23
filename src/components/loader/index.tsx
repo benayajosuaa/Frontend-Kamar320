@@ -10,11 +10,11 @@ const quesFont = Questrial({
 })
 
 const loader_words = [
-  "8 Jam Kuliah...",
-  "8 Jam Belajar...",
-  "2 Jam Drakor...",
-  "6 Jam Tidur...",
-  "Silahkan masuk",
+  "8 Jam Kuliah",
+  "8 Jam Belajar",
+  "2 Jam Drakor",
+  "6 Jam Tidur",
+  "kamar320.com",
 ]
 
 type LoaderProps = {
