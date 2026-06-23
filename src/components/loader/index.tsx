@@ -15,7 +15,85 @@ const loader_words = [
   "Live Tiktok",
   "Tidur",
   "kamar320.com",
+  "Silahkan masuk",
 ]
+
+const commonPreloadAssets = [
+  "/logo/kamar320-putih.png",
+  "/logo/kamar320.png",
+  "/logo/icon-putih.svg",
+  "/logo/icon-ungu.svg",
+  "/logo/tulisan-kamar.png",
+  "/logo/webicon.png",
+]
+
+const routePreloadAssets: Record<string, string[]> = {
+  "/": [
+    "/home/manten.png",
+    "/home/wnt.png",
+    "/home/fotokamar320.png",
+  ],
+  "/work": [
+    "/work/tbm.png",
+    "/work/photoscape.png",
+    "/work/haloben.png",
+    "/work/sbd.png",
+  ],
+  "/benaya-joshua": [
+    "/ben/ben.jpg",
+    "/ben/part.png",
+    "/ben/edu/lentera.jpg",
+    "/ben/edu/uph.png",
+    "/ben/org/falcon.jpg",
+    "/ben/org/idea.png",
+    "/ben/work/marketing.jpeg",
+  ],
+  "/under-development": [
+    "/utilitas/nukang.png",
+  ],
+}
+
+const normalizeAssetPath = (src: string) => {
+  if (src.startsWith("/") || src.startsWith("http")) {
+    return src
+  }
+
+  return `/${src}`
+}
+
+const preloadAsset = (src: string) => {
+  const assetPath = normalizeAssetPath(src)
+  const cleanPath = assetPath.split("?")[0]
+  const isImageAsset = /\.(png|jpe?g|webp|gif|svg|ico)$/i.test(cleanPath)
+
+  if (!isImageAsset) {
+    return fetch(assetPath, { cache: "force-cache" }).then(() => undefined)
+  }
+
+  return new Promise<void>((resolve) => {
+    const image = new window.Image()
+    let isSettled = false
+
+    const settle = () => {
+      if (isSettled) {
+        return
+      }
+
+      isSettled = true
+      resolve()
+    }
+
+    image.decoding = "async"
+    image.loading = "eager"
+    image.onload = settle
+    image.onerror = settle
+    image.src = assetPath
+
+    if (image.decode) {
+      image.decode().then(settle).catch(settle)
+    }
+  })
+}
 
 type LoaderProps = {
   children?: ReactNode
@@ -29,6 +107,8 @@ export default function Loader({ children }: LoaderProps) {
 
   // loading selesai
   const [isDone, setDone] = useState(false)
+  const [assetsReady, setAssetsReady] = useState(false)
+  const [minimumDurationDone, setMinimumDurationDone] = useState(false)
 
   // animasi exit
   const [isExit, setExit] = useState(false)
@@ -60,9 +140,43 @@ export default function Loader({ children }: LoaderProps) {
   }, [])
 
   useEffect(() => {
+    if (isPreviewMode) {
+      setAssetsReady(true)
+      return
+    }
+
+    let isMounted = true
+    const assetsToPreload = Array.from(
+      new Set([
+        ...commonPreloadAssets,
+        ...(routePreloadAssets[pathname] ?? []),
+      ]),
+    )
+
+    Promise.allSettled(assetsToPreload.map(preloadAsset)).then(() => {
+      if (isMounted) {
+        setAssetsReady(true)
+      }
+    })
+
+    return () => {
+      isMounted = false
+    }
+  }, [pathname, isPreviewMode])
+
+  useEffect(() => {
+    if (!assetsReady || !minimumDurationDone) {
+      return
+    }
+
+    setDone(true)
+  }, [assetsReady, minimumDurationDone])
+
+  useEffect(() => {
 
     const start = performance.now()
     const duration = 2600
+    let animationFrameId = 0
 
     const tick = (now: number) => {
 
@@ -77,16 +191,20 @@ export default function Loader({ children }: LoaderProps) {
       setProgress(nextProgress)
 
       if (ratio < 1) {
-        requestAnimationFrame(tick)
+        animationFrameId = requestAnimationFrame(tick)
       } else if (isPreviewMode) {
         setProgress(100)
       } else {
-        setDone(true)
+        setMinimumDurationDone(true)
       }
 
     }
 
-    requestAnimationFrame(tick)
+    animationFrameId = requestAnimationFrame(tick)
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+    }
 
   }, [isPreviewMode])
 
