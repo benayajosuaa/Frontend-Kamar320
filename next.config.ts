@@ -39,6 +39,12 @@ const nextConfig: NextConfig = {
           "https://card-rho-lyart.vercel.app/",
         permanent: false,
       },
+      {
+        source: "/wdk3-summary",
+        destination:
+          "https://benayasimamora.notion.site/WDK-3-Allah-dan-Ciptaan-Baru-36c7b4f7e45680afbb3affe5c61fb2b1",
+        permanent: false,
+      },
     ];
   },
 };
