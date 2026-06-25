@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  reactCompiler: true,
   async redirects() {
     return [
       {
@@ -43,6 +44,12 @@ const nextConfig: NextConfig = {
         source: "/wdk3-summary",
         destination:
           "https://benayasimamora.notion.site/WDK-3-Allah-dan-Ciptaan-Baru-36c7b4f7e45680afbb3affe5c61fb2b1",
+        permanent: false,
+      },
+      {
+        source: "/25-Juni",
+        destination:
+          "https://drive.google.com/drive/folders/1Y2LKf9H8G6fu4iStkFxQBoB6g9s_U4qW?usp=sharing",
         permanent: false,
       },
     ];
