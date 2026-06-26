@@ -98,6 +98,14 @@ const pesan = [
     avatar: "🚪",
     isi: "semangat kk mei dalam profesinya, semoga diberi kesabaran dan ketabahan serta hikmat dalam menjalani setiap pekerjaan yang dipercaya nantinya. tq kk mei yg udah jadi pndengar yg baik belakangan ini meskipun cuma sebentar doang tpi itu sngt berharga xixixix! tetap semangat dan mari mengurangi galau",
   },
+  { 
+    id: 10,
+    dari: "Ivon",
+    role: "Gadis Netral",
+    unit: "Netral",
+    avatar: "💅",
+    isi: "Semangat untuk profesi partner dalam segala hal",
+  }
 
 ];
 
