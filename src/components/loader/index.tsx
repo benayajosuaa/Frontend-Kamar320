@@ -15,6 +15,7 @@ const loader_words = [
   "Tidur",
   "w: kamar320.com",
   "i: @inside.kamar320",
+  "Silahkan masuk",
 ]
 
 const commonPreloadAssets = [
