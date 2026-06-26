@@ -2,7 +2,6 @@
 
 import { ChevronLeft, ChevronRight, Mailbox, X } from "lucide-react";
 import { Questrial, Rajdhani } from "next/font/google";
-import type { CSSProperties } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const rajdhani = Rajdhani({
@@ -20,9 +19,8 @@ const questrial = Questrial({
 const NAMA_PENERIMA = "ESTAFIN MEILA KRISTANTO DRAJAT";
 
 const animation_monitor_1 = [
-  "Semangat Menjalani Pelayanannya",
+  "Aerocom untuk Mba Mei",
   "Selamat menjalani babak baru",
-  "Jangan Galau Mulu",
 ];
 
 const scrambleChars = "@#$%";
@@ -30,62 +28,93 @@ const scrambleChars = "@#$%";
 const pesan = [
   {
     id: 1,
-    dari: "Rina Kusuma",
-    role: "Sahabat SMA",
-    unit: "Keluarga & Sahabat",
-    avatar: "🩺",
-    isi: "Selamat menempuh perjalanan baru.... Semoga setiap langkahmu di Siloam Hospital menjadi tempat kamu bertumbuh, melayani dengan hati, dan menemukan banyak alasan untuk bangga pada dirimu sendiri.",
+    dari: "Yoll",
+    role: "Cibed",
+    unit: "Cibed",
+    avatar: "💗",
+    isi: "Cuma mau bilang Thankyou udh berjuang sampe di titik ini. Thankyou udh menjadi cibed pertama aku di kamar 1705, walaupun cuman 1 tahun, mbak Mei mengajarkan aku banyak hal. Semangat profesinya ya cibedd, semoga di tempat mba Mei bertempur nanti dikelilingi orang2 yg baik, suport dan caring sama mba. Jangan lupa nanti ajak aku ya ke kost mbaa kalau liburr hehe🤣, traktir mie ayamm yg deket kost itu yak😋, Kalau butuh bantuan jangan ragu ya mba chat aku, love uu😘",
   },
   {
     id: 2,
-    dari: "Budi Santoso",
-    role: "Teman Kuliah",
-    unit: "Teman Kuliah",
-    avatar: "🩺",
-    isi: "Dari semua orang di angkatan.... kamu salah satu yang paling konsisten memperjuangkan mimpi ini. Jangan lupa istirahat, tetap rendah hati, dan tetap jadi orang yang membawa tenang ke ruangan mana pun.",
+    dari: "Olip",
+    role: "Cibed",
+    unit: "Cibed",
+    avatar: "💗",
+    isi: "Hallo mbak meya mwehehehe, sebenarnya nggak tau mau ngomong apa lagi dan bingung juga yah. Aku happy punya cibed dan dapat cibed kaya mbak meya, aku asalkan dengar cerita permasalahan mengenai cibed kawan aku dari luar, aku selalu berpikir bersyukur dapat mbak, walaupun kita sering berantem tapi mbak selalu baik (muah).  Aku bersyukur dapat mbak sebagai cibed karena mbak termasuk orang yang perhatian, peduli, mau ngajarin aku buat menjadi berani, masih mau ngajarin aku segala sesuatu yang bisa buat aku belajar lagi, bahkan aku masih ingat aku habis nangis karena homesick dan mbak meya kasih aku cokelat. Mbak juga orangnya bikin happy, makanya aku senang cerita ke mbak mei, mbak meya juga udah kaya kakak bagi aku :(. Mbak udah mau profesi ya? Sedih sebenarnya mbak udah mau ngekost, kita juga jadi jarang ketemu nanti nggak ada yang bisa ajarin aku lagi, nanti juga nggak ada yang bisa aku tanya tanya random lagi mbak :( walaupun mbak di rumah sakit sebelah tapi belom tentuh kita main bareng lagi  lagian kenapa mbak cepat banget piginya. Sekali lagi aku Cuma mau bilang makasih banyak udah jadi cibed aku dari awal sampe akhir, aku nggak bakal lupain mbak yang dari awal selalu nolong aku dalam kesusahan, mau cerita ke aku, mau menjadi pendengar aku, mau menerima keusilan aku, mau selalu ngajarin aku segala hal, Bahkan ngajarin aku untuk buat ngelakuin dengan berani dan jangan takut selagi kita benar. Makasih mbak baik baik disana bye bye :3 sayang mbak mei sebagai kakak dan cibed :D",
   },
   {
     id: 3,
-    dari: "Mama & Papa",
-    role: "Keluarga",
-    unit: "Keluarga",
-    avatar: "❤️",
-    isi: "Nak, melihatmu mengenakan seragam.... rasanya seperti melihat doa-doa kecil yang dulu kami bisikkan akhirnya menemukan jalannya. Kami bangga, kami sayang, dan kami selalu mendoakanmu.",
+    dari: "Meizy",
+    role: "Taurus girl",
+    unit: "Taurus girl",
+    avatar: "♉️",
+    isi: "Halo, Mbak Mei Jawa <3 Mbak Mei, semangat ya beberapa saat sebelum menuju profesi. Mbak Mei, keren banget udah lewatin hampir 3 tahun di FoN dan tahan banting sampai dihari ini. Dari awal kenal Mbak Mei, aku masih takut soalnya aku pikir, Mbak orangnya galak dan tegas :) Dan, ternyata Mbak Mei orangnya baik banget! <3 Aku bersyukur banget ketemu Mbak Mei, orang yang pemikiran dewasa, selalu mau di ajak curhat meskipun aku curcol gajelas. Mau jadi penengah buat semua orang padahal Mbak sendiri juga punya masalah :)) I don’t even know what to write anymore to describe how grateful I am to have met Mbak Mei. Sukses selalu Mbak Mei, dimanapun Mbak Mei ditempatkan nanti, Mbak selalu baik dan pasti akan ketemu orang baik! Maafkan adikmu ini yang masih suka ngeluh dan banyak gajelasnya, semoga Mbak Mei selalu di kelilingi hal-hal baik.",
   },
   {
     id: 4,
-    dari: "Sari Dewi",
-    role: "Partner Cerita",
-    unit: "Teman Praktik",
-    avatar: "✨",
-    isi: "Kita udah ngelewatin... banyak banget fase, dari capek kuliah sampai deg-degan praktik. Sekarang giliran kamu masuk bab baru. Aku percaya kamu akan jadi perawat yang bukan cuma cakap, tapi juga hangat.",
+    dari: "Jenifer",
+    role: "Cece",
+    unit: "Cece",
+    avatar: "🧑‍🧒",
+    isi: "semangat menuju ners ya adek kecil💕",
   },
   {
     id: 5,
-    dari: "Dosen Pembimbing",
-    role: "Bu Hartini, S.Kep., Ns.",
-    unit: "Civitas Akademik",
-    avatar: "📋",
-    isi: "Selama bimbingan, saya... melihat ketekunan dan empati yang kuat dalam diri Anda. Bawalah dua hal itu dalam pelayanan profesional Anda. Selamat bertugas, terus belajar, dan tetap jaga integritas.",
+    dari: "Jepa",
+    role: "Pacar Haikal",
+    unit: "Pacar Haikal",
+    avatar: "💕",
+    isi: "Mbak Mei, senang banget bisa kenal dan sekamar sama Mbak. First impression aku dulu tuh Mbak orangnya kalem dan ramah banget. Eh, ternyata makin lama kenal, sisi tengil sama usilnya mulai kelihatan juga. 😂 Tapi justru itu yang bikin suasana kamar jadi seru dan nggak pernah sepi. Makasih ya, Mbak, udah sering ngobrol, bercanda, dan jadi kakak kamar yang baik. Sekarang Mbak mau mulai perjalanan baru di profesi. Semoga semuanya lancar, selalu sehat, dan dimudahkan di setiap prosesnya. Nanti kalau udah di kos jangan keseringan kangen sama asrama ya... apalagi kangen sama aku. 🤭 Semoga betah di tempat baru, tapi jangan lupa main atau mampir kalau sempat. Semangat terus ya, Mbak Mei!",
   },
+  {
+    id: 6,
+    dari: "Dini",
+    role: "Artis FIT",
+    unit: "Artis Tiktok",
+    avatar: "📱",
+    isi: "Hai Mbak Mei👋 \n Ciee sekarang udh mau masuk ditahap baru dikehidupan Mbak, semangat buat profesi 1 tahunnya pastinya ada banyak tantangan,bornout, senang dan sedihnya tapi aku yakin Mbak bisa lewatin itu semua🥰. \n First impressions aku kira Mbak itu orang yang galak,tegas dan gabisa di ajak bercanda tapi ternyata setelah kenal Mbak orangnya plenger dan dewasa banget :) \n Aku bersyukur bisa kenal Mbak di kamar ini. Trimakasih sudah mau mendengar semua ceritaku yang banyak drama ini, makasih udh ngajarin aku dikamar, walau aku tau sendiri Mbak sesibuk itu tapi mau menyempatkan waktu buat mendengarkan cerita dan ngajarin aku ini, dari Mbak aku belajar banyak hal🫶🏻 \n Mbak mei jangan bosan cerita ke aku ya kalau butuh bantuan kabarin aja, jangan sedih² di kost nanti harus jadi cewek kuat tahan banting yaa Mbakk😌. Semoga dapat jodoh di profesi nanti yang sesuai dengan Mbak, jangan lupa cerita ke aku yaaaa :3 \n Ohiyaa info kost Mbak yaa, biar aku bisa kesana nanti xixixixixi, mau jadi penguasa kost Mbak mei, jangan lupa traktir anak kicik ini yaa kalau gajian hehehehehe😙 \n Good luck on your next adventure, Mbak Mei! I hope this new journey brings you lots of happiness, great experiences, and amazing people. Stay kind, stay humble, and keep being the wonderful person you are. I'll definitely miss having you around. 🤍",
+  },
+  {
+    id: 7,
+    dari: "Flora",
+    role: "Nias",
+    unit: "Nias",
+    avatar: "💕",
+    isi: "Aloo mbak mey,ciee yang udh mau masuk ke dunia orang dewasa wkwk.Sebelumnya terimakasih banyak buat waktu,kebaikan dan keceriaan mbak mey dalam satu tahun ini dikamar,terimakasih juga udah jadi sidebed dan kk kamar  yang sangat menginspirasi buat aku dalam setahun ini,hati hati yaa diluar sana aku yakin mbak mey bisa jaga diri dan bisa tuntasin professi ini dengan sangat baik,semoga bertemu dengan orang orang baik yang bisa bantu mbak untuk lewatin masa profesi dengan lancar.Urusan jodoh jangan terlalu dipusingin yakk tapi tetap berdoa semoga bertemu diwaktu yang tepat.Semangat buat hidup mandirinyaa!!",
+  },
+  {
+    id: 8,
+    dari: "Kenny",
+    role: "China Mainland",
+    unit: "Kamar320",
+    avatar: "🚪",
+    isi: "Selamat ya, Kak Mei, atas pencapaiannya dalam menjalani profesinya. Semoga ini menjadi awal yang indah untuk perjalanan karier Mbak, dan semoga Tuhan selalu menyertai setiap langkah, memberikan kesehatan, kekuatan, serta hikmat dalam menjalankan profesi yang mulia ini. Senang banget bisa kenal dan bertemu sama kak Mei. Karena kalau bukan karena kak Mei mungkin aku ga dapet second ignya seseorang xixixixixixi and walaupun nanti pasti bakal makin sibuk sama kerjaan, jangan lupa sesekali tetap join live-nya Ben ya, biar kita masih bisa cerita-cerita dan ketawa bareng lagi. Sekali lagi, selamat ya, kak Mei",
+  },
+  {
+    id: 9,
+    dari: "Ben",
+    role: "CEO kamar320 wkwkw",
+    unit: "Kamar320",
+    avatar: "🚪",
+    isi: "semangat kk mei dalam profesinya, semoga diberi kesabaran dan ketabahan serta hikmat dalam menjalani setiap pekerjaan yang dipercaya nantinya. tq kk mei yg udah jadi pndengar yg baik belakangan ini meskipun cuma sebentar doang tpi itu sngt berharga xixixix! tetap semangat dan mari mengurangi galau",
+  },
+
 ];
 
 type Pesan = (typeof pesan)[number];
 type Direction = "next" | "prev";
-type CapsulePhase = "idle" | "shoot-next" | "shoot-prev" | "arrive-next" | "arrive-prev";
+type CapsulePhase = "idle" | "exit-right" | "exit-left" | "enter-left" | "enter-right" | "clunk";
 
 export default function NewJourney() {
   const [isIntroVisible, setIsIntroVisible] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<Direction>("next");
   const [capsulePhase, setCapsulePhase] = useState<CapsulePhase>("idle");
-  const [shootDuration, setShootDuration] = useState(210);
   const [monitorText, setMonitorText] = useState(animation_monitor_1[0]);
   const [isMonitorTextVisible, setIsMonitorTextVisible] = useState(true);
   const [openedMessage, setOpenedMessage] = useState<Pesan | null>(null);
   const [isClosing, setIsClosing] = useState(false);
   const touchStartX = useRef<number | null>(null);
-  const touchStartAt = useRef<number | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navTimers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const isNavigating = useRef(false);
@@ -93,7 +122,7 @@ export default function NewJourney() {
 
   const activeMessage = pesan[activeIndex];
 
-  const moveTo = useCallback((nextIndex: number, nextDirection: Direction, velocity = 0) => {
+  const moveTo = useCallback((nextIndex: number, nextDirection: Direction) => {
     if (isNavigating.current || nextIndex === activeIndex) {
       return;
     }
@@ -102,40 +131,61 @@ export default function NewJourney() {
     navTimers.current.forEach(clearTimeout);
     navTimers.current = [];
 
-    const clampedDuration = Math.round(Math.max(150, Math.min(300, 280 - velocity * 130)));
     const wrappedIndex = (nextIndex + pesan.length) % pesan.length;
 
-    setShootDuration(clampedDuration);
     setDirection(nextDirection);
-    setCapsulePhase(nextDirection === "next" ? "shoot-next" : "shoot-prev");
+    setCapsulePhase(nextDirection === "next" ? "exit-right" : "exit-left");
 
     navTimers.current.push(
       setTimeout(() => {
         setActiveIndex(wrappedIndex);
-        setCapsulePhase(nextDirection === "next" ? "arrive-next" : "arrive-prev");
-      }, clampedDuration + 55),
+        setCapsulePhase(nextDirection === "next" ? "enter-left" : "enter-right");
+      }, 200),
+    );
+
+    navTimers.current.push(
+      setTimeout(() => {
+        setCapsulePhase("clunk");
+      }, 680),
     );
 
     navTimers.current.push(
       setTimeout(() => {
         setCapsulePhase("idle");
         isNavigating.current = false;
-      }, clampedDuration + 440),
+      }, 860),
     );
   }, [activeIndex]);
 
-  const goNext = useCallback((velocity = 0) => {
-    moveTo(activeIndex + 1, "next", velocity);
+  const goNext = useCallback(() => {
+    moveTo(activeIndex + 1, "next");
   }, [activeIndex, moveTo]);
 
-  const goPrev = useCallback((velocity = 0) => {
-    moveTo(activeIndex - 1, "prev", velocity);
+  const goPrev = useCallback(() => {
+    moveTo(activeIndex - 1, "prev");
   }, [activeIndex, moveTo]);
 
   const capsuleKey = useMemo(
     () => `${activeMessage.id}-${direction}-${capsulePhase}`,
     [activeMessage.id, direction, capsulePhase],
   );
+
+  const getCapsuleClass = () => {
+    switch (capsulePhase) {
+      case "exit-right":
+        return "capsule-exit-right";
+      case "exit-left":
+        return "capsule-exit-left";
+      case "enter-left":
+        return "capsule-enter-from-left";
+      case "enter-right":
+        return "capsule-enter-from-right";
+      case "clunk":
+        return "capsule-clunk";
+      default:
+        return "";
+    }
+  };
 
   useEffect(() => {
     const introTimer = window.setTimeout(() => setIsIntroVisible(false), 3000);
@@ -206,10 +256,15 @@ export default function NewJourney() {
         clearTimeout(closeTimer.current);
       }
       navTimers.current.forEach(clearTimeout);
+      isNavigating.current = false;
     };
   }, []);
 
   const startOpenMessage = () => {
+    if (isNavigating.current) {
+      return;
+    }
+
     setIsClosing(false);
     setOpenedMessage(activeMessage);
   };
@@ -224,7 +279,6 @@ export default function NewJourney() {
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = event.touches[0].clientX;
-    touchStartAt.current = performance.now();
   };
 
   const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
@@ -233,19 +287,16 @@ export default function NewJourney() {
     }
 
     const distance = event.changedTouches[0].clientX - touchStartX.current;
-    const elapsed = Math.max(1, performance.now() - (touchStartAt.current ?? performance.now()));
-    const velocity = Math.min(1, Math.abs(distance) / elapsed);
     touchStartX.current = null;
-    touchStartAt.current = null;
 
     if (Math.abs(distance) < 40) {
       return;
     }
 
     if (distance < 0) {
-      goNext(velocity);
+      goNext();
     } else {
-      goPrev(velocity);
+      goPrev();
     }
   };
 
@@ -268,8 +319,8 @@ export default function NewJourney() {
 
       <header className="top-bar">
         <div>
-          <span className="hospital-mark">made by kamar320</span>
-          <h1>aerocommeii</h1>
+          <span className="hospital-mark">dari kamar320</span>
+          <h1>aerocomei</h1>
         </div>
         <p>{NAMA_PENERIMA}</p>
       </header>
@@ -280,7 +331,6 @@ export default function NewJourney() {
             <div className="monitor-screen">
               <p className={isMonitorTextVisible ? "monitor-text visible" : "monitor-text"}>
                 {monitorText}
-                <span className="typing-cursor">|</span>
               </p>
             </div>
             <div className="monitor-chin">
@@ -328,8 +378,7 @@ export default function NewJourney() {
         >
           <button
             key={capsuleKey}
-            className={`capsule-shell capsule-${capsulePhase}`}
-            style={{ "--shoot-duration": `${shootDuration}ms` } as CSSProperties}
+            className={`capsule-shell capsule-phase-${capsulePhase}`}
             type="button"
             onClick={startOpenMessage}
             aria-label={`Buka pesan dari ${activeMessage.dari}`}
@@ -342,7 +391,7 @@ export default function NewJourney() {
               <span />
               <span />
             </span>
-            <span className="capsule-3d">
+            <span className={`capsule-3d ${getCapsuleClass()}`}>
               <span className="capsule-cap cap-left" aria-hidden="true" />
               <span className="capsule-ring ring-left" aria-hidden="true" />
               <span className="accent-ring accent-left" aria-hidden="true" />
@@ -372,7 +421,7 @@ export default function NewJourney() {
       </section>
 
       <footer className="footer-note">
-        jika ada pergumulan jangan ragu untuk menghubungi information@kamar320.com
+        kamar320.com
       </footer>
 
       {openedMessage && (
@@ -620,12 +669,6 @@ export default function NewJourney() {
           opacity: 1;
         }
 
-        .typing-cursor {
-          display: inline-block;
-          margin-left: 3px;
-          animation: blink 1s step-end infinite;
-        }
-
         .monitor-chin {
           position: relative;
           height: 24px;
@@ -822,20 +865,26 @@ export default function NewJourney() {
           transform: scale(0.97);
         }
 
-        .capsule-shoot-next .capsule-3d {
-          animation: capsule-shoot-right var(--shoot-duration) cubic-bezier(0.55, 0, 1, 0.45) both;
+        .capsule-exit-right {
+          animation: capsule-shoot-right 200ms cubic-bezier(0.55, 0, 1, 0.45) forwards;
+          pointer-events: none;
         }
 
-        .capsule-shoot-prev .capsule-3d {
-          animation: capsule-shoot-left var(--shoot-duration) cubic-bezier(0.55, 0, 1, 0.45) both;
+        .capsule-exit-left {
+          animation: capsule-shoot-left 200ms cubic-bezier(0.55, 0, 1, 0.45) forwards;
+          pointer-events: none;
         }
 
-        .capsule-arrive-next .capsule-3d {
-          animation: capsule-arrive-from-left 320ms cubic-bezier(0.16, 1, 0.3, 1) both, capsule-clunk-stop 200ms ease 320ms both;
+        .capsule-enter-from-left {
+          animation: capsule-arrive-from-left 480ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .capsule-arrive-prev .capsule-3d {
-          animation: capsule-arrive-from-right 320ms cubic-bezier(0.16, 1, 0.3, 1) both, capsule-clunk-stop 200ms ease 320ms both;
+        .capsule-enter-from-right {
+          animation: capsule-arrive-from-right 480ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .capsule-clunk {
+          animation: capsule-clunk-stop 180ms ease-out forwards;
         }
 
         .capsule-body,
@@ -989,16 +1038,16 @@ export default function NewJourney() {
           transform: translateY(-50%);
         }
 
-        .capsule-shoot-next .motion-trail {
+        .capsule-phase-exit-right .motion-trail {
           right: 52%;
           background: linear-gradient(to left, transparent, rgba(240, 165, 0, 0.22), transparent);
-          animation: trail-flash var(--shoot-duration) ease both;
+          animation: trail-flash 200ms ease both;
         }
 
-        .capsule-shoot-prev .motion-trail {
+        .capsule-phase-exit-left .motion-trail {
           left: 52%;
           background: linear-gradient(to right, transparent, rgba(240, 165, 0, 0.22), transparent);
-          animation: trail-flash var(--shoot-duration) ease both;
+          animation: trail-flash 200ms ease both;
         }
 
         .air-puffs {
@@ -1039,8 +1088,8 @@ export default function NewJourney() {
           transform: translateY(24px);
         }
 
-        .capsule-arrive-next .air-puffs,
-        .capsule-arrive-prev .air-puffs {
+        .capsule-phase-enter-left .air-puffs,
+        .capsule-phase-enter-right .air-puffs {
           animation: puff-burst 360ms ease-out both;
         }
 
@@ -1442,17 +1491,6 @@ export default function NewJourney() {
           100% {
             opacity: 0;
             transform: scale(1.5);
-          }
-        }
-
-        @keyframes blink {
-          0%,
-          50% {
-            opacity: 1;
-          }
-          51%,
-          100% {
-            opacity: 0;
           }
         }
 

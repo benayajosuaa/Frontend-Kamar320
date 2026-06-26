@@ -537,3 +537,299 @@ Terapkan Questrial HANYA pada:
 
 Semua elemen lain (header, label, button, monitor display) tetap menggunakan 
 Rajdhani atau font yang sudah ada sebelumnya.
+
+
+
+
+
+
+
+# REVISI V.2 - Aerocomei
+# Aerocomei — Codex Prompt: Revisi Animasi & Interaksi
+
+> Dokumen ini adalah panduan lengkap revisi untuk aplikasi farewell website **aerocomei** berbasis React.
+> Terdiri dari prompt asli + dua layer revisi tambahan yang harus diimplementasikan.
+
+---
+
+## KONTEKS PROYEK
+
+Aplikasi React SPA bertema **Pneumatic Tube System** untuk website perpisahan seorang perawat baru di Siloam Hospital. Sudah ada implementasi sebelumnya — dokumen ini berisi **revisi spesifik** yang harus diterapkan di atas kode yang sudah ada.
+
+---
+
+## REVISI A — MONITOR TEXT EFFECT
+
+### Hapus Typing Cursor `|`
+
+Pada komponen `<MainMonitor />`, efek typewriter saat ini menampilkan karakter `|` (blinking cursor) di akhir teks. **Hapus cursor ini sepenuhnya.**
+
+**Yang dipertahankan:** animasi pergantian teks (fade out → fade in setiap 3000ms) tetap berjalan normal.
+
+**Yang dihapus:** semua logika/rendering cursor, termasuk:
+- Karakter `|` yang di-append ke string teks
+- CSS `@keyframes blink` yang menganimasikan cursor
+- Elemen `<span>` atau pseudo-element yang berperan sebagai cursor
+- State/ref apapun yang melacak posisi cursor
+
+**Jika menggunakan Typed.js:**
+```js
+// SEBELUM
+new Typed(el, { showCursor: true, cursorChar: '|', ... })
+
+// SESUDAH
+new Typed(el, { showCursor: false, ... })
+```
+
+**Jika implementasi custom (useEffect + setInterval):**
+```jsx
+// SEBELUM — jangan lakukan ini
+const displayText = currentText + (showCursor ? '|' : '')
+
+// SESUDAH — hapus cursor sama sekali
+const displayText = currentText
+```
+
+**Hasil akhir:** teks di monitor berganti dengan efek fade/scramble, tanpa ada karakter kursor apapun yang muncul.
+
+---
+
+## REVISI B — TUBE CAPSULE SLIDE ANIMATION
+
+### Ganti Logika Animasi Navigasi
+
+Animasi saat ini menggunakan fade atau slide sederhana. **Ganti sepenuhnya** dengan animasi berbasis fisika yang mensimulasikan kapsul yang ditembak dengan tekanan udara dan melambat saat mendekati tengah.
+
+---
+
+### Prinsip Dasar
+
+| Arah klik | Kapsul aktif | Kapsul baru datang dari |
+|-----------|-------------|------------------------|
+| Klik `>` (Next) | Keluar ke kanan | Masuk dari kiri |
+| Klik `<` (Prev) | Keluar ke kiri | Masuk dari kanan |
+
+---
+
+### CSS Keyframes yang Harus Dibuat
+
+Tambahkan keyframes berikut ke stylesheet (hapus/override animasi slide lama):
+
+```css
+/* ── EXIT ANIMATIONS ─────────────────────────── */
+
+@keyframes capsule-shoot-right {
+  0%   { transform: translateX(0) scale(1);     opacity: 1; }
+  15%  { transform: translateX(20px) scale(0.98); }
+  100% { transform: translateX(120vw) scale(0.85); opacity: 0.3; }
+}
+
+@keyframes capsule-shoot-left {
+  0%   { transform: translateX(0) scale(1);      opacity: 1; }
+  15%  { transform: translateX(-20px) scale(0.98); }
+  100% { transform: translateX(-120vw) scale(0.85); opacity: 0.3; }
+}
+
+/* ── ENTER ANIMATIONS (efek ngerem/decelerate) ── */
+
+@keyframes capsule-arrive-from-left {
+  0%   { transform: translateX(-120vw) scale(0.85); opacity: 0.3; }
+  70%  { transform: translateX(8px) scale(1.02);   opacity: 1; }
+  85%  { transform: translateX(-3px) scale(0.99); }
+  100% { transform: translateX(0) scale(1);         opacity: 1; }
+}
+
+@keyframes capsule-arrive-from-right {
+  0%   { transform: translateX(120vw) scale(0.85);  opacity: 0.3; }
+  70%  { transform: translateX(-8px) scale(1.02);   opacity: 1; }
+  85%  { transform: translateX(3px) scale(0.99); }
+  100% { transform: translateX(0) scale(1);          opacity: 1; }
+}
+
+/* ── STOP MICRO-VIBRATION (jalankan setelah arrive) ── */
+
+@keyframes capsule-clunk-stop {
+  0%   { transform: translateX(0); }
+  30%  { transform: translateX(6px); }
+  60%  { transform: translateX(-2px); }
+  80%  { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+```
+
+---
+
+### CSS Class Definitions
+
+```css
+/* Kapsul keluar ke kanan (klik ">") */
+.capsule-exit-right {
+  animation: capsule-shoot-right 200ms cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  pointer-events: none;
+}
+
+/* Kapsul keluar ke kiri (klik "<") */
+.capsule-exit-left {
+  animation: capsule-shoot-left 200ms cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  pointer-events: none;
+}
+
+/* Kapsul baru masuk dari kiri — efek ngerem ke tengah */
+.capsule-enter-from-left {
+  animation: capsule-arrive-from-left 480ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Kapsul baru masuk dari kanan — efek ngerem ke tengah */
+.capsule-enter-from-right {
+  animation: capsule-arrive-from-right 480ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Micro-vibration setelah kapsul berhenti */
+.capsule-clunk {
+  animation: capsule-clunk-stop 180ms ease-out forwards;
+}
+```
+
+---
+
+### Logika React — State & Timing
+
+```jsx
+// State yang dibutuhkan
+const [currentIndex, setCurrentIndex] = useState(0);
+const [animState, setAnimState] = useState('idle'); 
+// animState: 'idle' | 'exit-right' | 'exit-left' | 'enter-left' | 'enter-right' | 'clunk'
+
+const [displayIndex, setDisplayIndex] = useState(0); 
+// displayIndex = index yang sedang ditampilkan di DOM
+
+const isAnimating = useRef(false);
+```
+
+```jsx
+// Fungsi navigasi Next (klik ">")
+const goNext = () => {
+  if (isAnimating.current) return;
+  isAnimating.current = true;
+
+  const nextIndex = (currentIndex + 1) % pesan.length;
+
+  // Step 1: exit kapsul aktif ke kanan
+  setAnimState('exit-right');
+
+  // Step 2: setelah exit selesai (~200ms), ganti konten & masukkan dari kiri
+  setTimeout(() => {
+    setCurrentIndex(nextIndex);
+    setDisplayIndex(nextIndex);
+    setAnimState('enter-left');
+  }, 200);
+
+  // Step 3: setelah enter selesai (~480ms), jalankan clunk
+  setTimeout(() => {
+    setAnimState('clunk');
+  }, 680); // 200 + 480
+
+  // Step 4: kembali ke idle
+  setTimeout(() => {
+    setAnimState('idle');
+    isAnimating.current = false;
+  }, 860); // 680 + 180
+};
+
+// Fungsi navigasi Prev (klik "<") — mirror
+const goPrev = () => {
+  if (isAnimating.current) return;
+  isAnimating.current = true;
+
+  const prevIndex = (currentIndex - 1 + pesan.length) % pesan.length;
+
+  setAnimState('exit-left');
+
+  setTimeout(() => {
+    setCurrentIndex(prevIndex);
+    setDisplayIndex(prevIndex);
+    setAnimState('enter-right');
+  }, 200);
+
+  setTimeout(() => {
+    setAnimState('clunk');
+  }, 680);
+
+  setTimeout(() => {
+    setAnimState('idle');
+    isAnimating.current = false;
+  }, 860);
+};
+```
+
+```jsx
+// Mapping animState ke CSS class
+const getCapsuleClass = () => {
+  switch (animState) {
+    case 'exit-right':   return 'capsule-exit-right';
+    case 'exit-left':    return 'capsule-exit-left';
+    case 'enter-left':   return 'capsule-enter-from-left';
+    case 'enter-right':  return 'capsule-enter-from-right';
+    case 'clunk':        return 'capsule-clunk';
+    default:             return '';
+  }
+};
+
+// Render
+<div className={`capsule ${getCapsuleClass()}`}>
+  {/* konten kapsul: nama pengirim */}
+</div>
+```
+
+---
+
+### Easing Reference
+
+| Animasi | Duration | Easing |
+|---------|----------|--------|
+| Exit (shoot out) | `200ms` | `cubic-bezier(0.55, 0, 1, 0.45)` — akselerasi agresif |
+| Enter (brake/decel) | `480ms` | `cubic-bezier(0.16, 1, 0.3, 1)` — ngerem ke tengah |
+| Clunk micro-vibration | `180ms` | `ease-out` |
+
+> **Note penting:** `cubic-bezier(0.16, 1, 0.3, 1)` adalah kunci dari feel "ngerem". Kurva ini membuat gerakan sangat cepat di awal (kapsul melesat dari luar layar) lalu melambat drastis saat mendekati posisi tengah — persis seperti kapsul pneumatik yang berhenti di stasiun penerima.
+
+---
+
+### Hal yang TIDAK Boleh Dilakukan
+
+- ❌ Jangan gunakan `opacity` fade-in/fade-out sebagai animasi utama
+- ❌ Jangan munculkan kapsul baru dari posisi tengah (bukan efek swipe biasa)
+- ❌ Jangan ganti konten kapsul sebelum animasi exit selesai
+- ❌ Jangan izinkan klik `<` / `>` selama animasi berlangsung (`isAnimating.current === true`)
+- ❌ Jangan gunakan `transition` CSS biasa — gunakan `@keyframes` sesuai spec di atas
+
+---
+
+### Container CSS
+
+Pastikan container tube punya `overflow: hidden` agar posisi off-screen (`translateX(±120vw)`) tidak menyebabkan horizontal scrollbar:
+
+```css
+.tube-container {
+  width: 100vw;
+  overflow: hidden;         /* wajib */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+```
+
+---
+
+## CHECKLIST IMPLEMENTASI
+
+- [ ] Hapus karakter `|` cursor dari `<MainMonitor />`
+- [ ] Hapus CSS `@keyframes blink` yang terkait cursor
+- [ ] Tambahkan 5 keyframes baru sesuai spec di atas
+- [ ] Buat 5 CSS class baru (exit-right, exit-left, enter-left, enter-right, clunk)
+- [ ] Refactor fungsi `goNext()` dan `goPrev()` dengan timing baru
+- [ ] Tambahkan `isAnimating` ref untuk block double-click
+- [ ] Pastikan `tube-container` punya `overflow: hidden`
+- [ ] Test di mobile: swipe kanan/kiri harus trigger animasi yang sama
+- [ ] Test di desktop: keyboard arrow keys `←` `→` harus berfungsi
