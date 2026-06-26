@@ -15,7 +15,6 @@ const loader_words = [
   "Live Tiktok",
   "Tidur",
   "kamar320.com",
-  "Silahkan masuk",
 ]
 
 const commonPreloadAssets = [
