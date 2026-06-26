@@ -15,7 +15,7 @@ const loader_words = [
   "Tidur",
   "w: kamar320.com",
   "i: @inside.kamar320",
-  "Silahkan masuk",
+  "w: +62 897-0052-654",
 ]
 
 const commonPreloadAssets = [
@@ -235,14 +235,8 @@ export default function Loader({ children }: LoaderProps) {
       return
     }
 
-    // kalau sudah selesai
-    // DAN sudah di slide terakhir
-    // stop looping
-
-    if (
-      isDone &&
-      currentSlide === "Silahkan masuk"
-    ) {
+    // kalau sudah selesai, stop looping
+    if (isDone) {
       return
     }
 
@@ -254,7 +248,7 @@ export default function Loader({ children }: LoaderProps) {
 
     return () => clearInterval(interval)
 
-  }, [isDone, currentSlide, isPreviewMode])
+  }, [isDone, isPreviewMode])
 
 
 
@@ -267,14 +261,8 @@ export default function Loader({ children }: LoaderProps) {
       return
     }
 
-    // tunggu:
-    // progress selesai
-    // DAN slide terakhir tampil
-
-    if (
-      !isDone ||
-      currentSlide !== "Silahkan masuk"
-    ) {
+    // tunggu progress dan preload selesai
+    if (!isDone) {
       return
     }
 
@@ -303,7 +291,7 @@ export default function Loader({ children }: LoaderProps) {
       clearTimeout(removeTimer)
     }
 
-  }, [isDone, currentSlide, isPreviewMode])
+  }, [isDone, isPreviewMode])
 
 
 
