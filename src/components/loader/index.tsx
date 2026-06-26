@@ -10,11 +10,11 @@ const quesFont = Questrial({
 })
 
 const loader_words = [
-  "Kuliah",
   "Belajar",
   "Live Tiktok",
   "Tidur",
-  "kamar320.com",
+  "w: kamar320.com",
+  "i: @inside.kamar320",
 ]
 
 const commonPreloadAssets = [
