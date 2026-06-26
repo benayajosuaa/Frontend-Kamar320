@@ -105,7 +105,15 @@ const pesan = [
     unit: "Netral",
     avatar: "💅",
     isi: "Semangat untuk profesi partner dalam segala hal",
-  }
+  },
+  {
+    id: 11,
+    dari: "Nonci",
+    role: "Akamsi Karawaci",
+    unit: "Akamsi",
+    avatar: "🏡",
+    isi: "Hallo mbak meiiiii, seneng deh kenal sama mba di kamar pertama ku iniii, bener bener bersyukur bangettt bisa ketemu mba mei, seneng dapat 1706. makasih yahh mbaa untuk setiap kebaikan mbak atas setiap dukungan dan motivasi mbak buat aku, itu berarti bangetttt tau. Semoga saat mba profesi nanti segala sesuatu nya dilancarkan yahh mba, jangan lupain aku yawww yg menggemaskan iniww, aku slalu berdoa yg terbaik untuk mbaaa. Lovvv u Mbakkkk💋🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍",
+  {
 
 ];
 
