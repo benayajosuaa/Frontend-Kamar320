@@ -18,6 +18,9 @@ const loader_words = [
   "w: +62 897-0052-654",
 ]
 
+const slideDuration = 1200
+const minimumLoaderDuration = slideDuration * loader_words.length
+
 const commonPreloadAssets = [
   "/logo/kamar320-putih.png",
   "/logo/kamar320.png",
@@ -104,6 +107,8 @@ export default function Loader({ children }: LoaderProps) {
 
   // progress 0 -> 100
   const [progress, setProgress] = useState(0)
+  const [assetProgress, setAssetProgress] = useState(0)
+  const [minimumDurationProgress, setMinimumDurationProgress] = useState(0)
 
   // loading selesai
   const [isDone, setDone] = useState(false)
@@ -141,6 +146,7 @@ export default function Loader({ children }: LoaderProps) {
 
   useEffect(() => {
     if (isPreviewMode) {
+      setAssetProgress(100)
       setAssetsReady(true)
       return
     }
@@ -153,7 +159,27 @@ export default function Loader({ children }: LoaderProps) {
       ]),
     )
 
-    Promise.allSettled(assetsToPreload.map(preloadAsset)).then(() => {
+    if (assetsToPreload.length === 0) {
+      setAssetProgress(100)
+      setAssetsReady(true)
+      return
+    }
+
+    setAssetProgress(0)
+
+    let loadedAssetCount = 0
+    const updateAssetProgress = () => {
+      if (!isMounted) {
+        return
+      }
+
+      loadedAssetCount += 1
+      setAssetProgress(Math.round((loadedAssetCount / assetsToPreload.length) * 100))
+    }
+
+    Promise.allSettled(
+      assetsToPreload.map((asset) => preloadAsset(asset).finally(updateAssetProgress)),
+    ).then(() => {
       if (isMounted) {
         setAssetsReady(true)
       }
@@ -163,6 +189,15 @@ export default function Loader({ children }: LoaderProps) {
       isMounted = false
     }
   }, [pathname, isPreviewMode])
+
+  useEffect(() => {
+    if (isPreviewMode) {
+      setProgress(100)
+      return
+    }
+
+    setProgress(Math.min(minimumDurationProgress, assetProgress))
+  }, [assetProgress, minimumDurationProgress, isPreviewMode])
 
   useEffect(() => {
     if (!assetsReady || !minimumDurationDone) {
@@ -175,7 +210,7 @@ export default function Loader({ children }: LoaderProps) {
   useEffect(() => {
 
     const start = performance.now()
-    const duration = 2600
+    const duration = minimumLoaderDuration
     let animationFrameId = 0
 
     const tick = (now: number) => {
@@ -188,12 +223,12 @@ export default function Loader({ children }: LoaderProps) {
 
       const nextProgress = Math.round(eased * 100)
 
-      setProgress(nextProgress)
+      setMinimumDurationProgress(nextProgress)
 
       if (ratio < 1) {
         animationFrameId = requestAnimationFrame(tick)
       } else if (isPreviewMode) {
-        setProgress(100)
+        setMinimumDurationProgress(100)
       } else {
         setMinimumDurationDone(true)
       }
@@ -244,7 +279,7 @@ export default function Loader({ children }: LoaderProps) {
 
       setSlideIndex((prev) => prev + 1)
 
-    }, 1200)
+    }, slideDuration)
 
     return () => clearInterval(interval)
 
