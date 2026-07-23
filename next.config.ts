@@ -55,6 +55,12 @@ const nextConfig: NextConfig = {
           "https://drive.google.com/drive/folders/1Y2LKf9H8G6fu4iStkFxQBoB6g9s_U4qW?usp=sharing",
         permanent: false,
       },
+      {
+        source: "/blok-m",
+        destination:
+          "https://drive.google.com/drive/folders/1gf5fftLGPt0vc8krWsqV0WIxJj8UkHXw?usp=sharing",
+        permanent: false,
+      },
     ];
   },
 };
