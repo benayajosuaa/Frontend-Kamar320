@@ -51,7 +51,7 @@ const dalam_pengerjaan: ProjectBerjalan[] = [
         dimulai: "Juni 18, 2026",
         estimasiLabel: "estimasi:",
         estimasi: "July 2026",
-        progressProject: "50 %",
+        progressProject: "97 %",
         gambarClassName: "h-56 w-full overflow-hidden rounded-sm bg-green-500 sm:h-64 md:h-72 lg:h-75 lg:w-auto",
         image:"home/manten.png"
     },
