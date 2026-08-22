@@ -61,6 +61,12 @@ const nextConfig: NextConfig = {
           "https://drive.google.com/drive/folders/1gf5fftLGPt0vc8krWsqV0WIxJj8UkHXw?usp=sharing",
         permanent: false,
       },
+      {
+        source: "/tabungan-kami",
+        destination:
+          "https://docs.google.com/forms/d/e/1FAIpQLSfvi6lm8WBg_JF17dUSA3hruSAFk9fbiAujdke4SCqf-fSbBg/viewform",
+        permanent: false,
+      },
     ];
   },
 };
