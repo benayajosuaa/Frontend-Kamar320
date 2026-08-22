@@ -64,7 +64,7 @@ const nextConfig: NextConfig = {
       {
         source: "/tabungan-kami",
         destination:
-          "https://docs.google.com/forms/d/e/1FAIpQLSfvi6lm8WBg_JF17dUSA3hruSAFk9fbiAujdke4SCqf-fSbBg/viewform",
+          "https://forms.gle/hATJTzrQqucqq5yd6",
         permanent: false,
       },
     ];
