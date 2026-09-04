@@ -1,6 +1,6 @@
 "use client"
-import Navbar from "../../../components/navbar"
-import Footer from "../../../components/footer"
+import Navbar from "../../../components/navbar-baru"
+import Footer from "../../../components/footer-baru"
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -76,7 +76,7 @@ export default function HomePage(){
         <div className={` ${quesFont.className}`}>
             <div>
                 <div className="fixed w-full z-30">
-                    <Navbar theme={navbarTheme} />
+                    <Navbar solid/>
                 </div>
 
 

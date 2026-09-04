@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
-import Navbar from "../../../components/navbar"
-import Footer from "../../../components/footer"
+import Navbar from "../../../components/navbar-baru"
+import Footer from "../../../components/footer-baru"
 import { Questrial } from "next/font/google";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
@@ -49,7 +49,7 @@ export default function HomePage(){
     return (
         <div className={`${quesFont.className} bg-transparent`}>
             <div className="fixed z-30 w-full bg-transparent">
-                <Navbar theme={navbarTheme} />
+                <Navbar solid/>
             </div>
             <div>
                 <div className="px-4 py-12 sm:px-8 sm:py-14 md:px-10 lg:px-15 lg:py-15">
