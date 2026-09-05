@@ -32,7 +32,7 @@ const linkNav = [
             },
             {
                 label: "Aktifitas Kami",
-                href: "/under-development",
+                href: "/activity",
                 desc: "lihat seluruh aktifitas yang ada di dalam ataupun diluar kamar320",
             },
         ],
