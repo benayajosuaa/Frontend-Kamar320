@@ -67,6 +67,12 @@ const nextConfig: NextConfig = {
           "https://forms.gle/hATJTzrQqucqq5yd6",
         permanent: false,
       },
+      {
+        source: "/panduan-ai",
+        destination:
+          "https://canva.link/ywmt3g7xvmrvinh",
+        permanent: false,
+      },
     ];
   },
 };
