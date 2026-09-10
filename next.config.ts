@@ -73,6 +73,18 @@ const nextConfig: NextConfig = {
           "https://canva.link/ywmt3g7xvmrvinh",
         permanent: false,
       },
+      {
+        source: "/paket-cms",
+        destination:
+          "https://fastwork.id/user/benayajosua/web-development-52764396?source=seller-center_my-service_share-link",
+        permanent: false,
+      },
+      {
+        source: "/paket-statis",
+        destination:
+          "https://fastwork.id/user/benayajosua/web-development-95500868?source=seller-center_my-service_share-link",
+        permanent: false,
+      },
     ];
   },
 };
