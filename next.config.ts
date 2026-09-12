@@ -85,6 +85,12 @@ const nextConfig: NextConfig = {
           "https://fastwork.id/user/benayajosua/web-development-95500868?source=seller-center_my-service_share-link",
         permanent: false,
       },
+      {
+        source: "/12-sep",
+        destination:
+          "https://canva.link/1fqko9vodtsu28p",
+        permanent: false,
+      },
     ];
   },
 };
