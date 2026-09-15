@@ -1,206 +1,300 @@
-"use client"
+"use client";
+import { GoArrowLeft } from "react-icons/go";
 import Link from "next/link";
-import Navbar from "../../../components/navbar-baru"
-import Footer from "../../../components/footer-baru"
-import { Questrial } from "next/font/google";
-import { useState, useRef } from "react";
-import { useEffect } from "react";
+import Navbar from "../../../components/navbar-baru";
+import Footer from "../../../components/footer-baru";
+import { poppins, quesFont } from "@/lib/font";
+import { GoArrowRight } from "react-icons/go";
+import { useState } from "react";
 
+export default function HomePage() {
+    const [nama, setNama] = useState("");
+    const [bisnis, setBisnis] = useState("");
+    const [keperluan, setKeperluan] = useState("");
 
-const quesFont = Questrial({
-  subsets: ["latin"],
-  weight: "400",
-});
+    const handleKonsultasi = () => {
+        // Validasi sederhana
+        if (!nama.trim() || !bisnis.trim() || !keperluan.trim()) {
+            alert("Mohon isi semua form terlebih dahulu.");
+            return;
+        }
 
-const hyperlinkContact = [
-    {index:1, href:"https://wa.me/628970052654?text=Hai!%20Tertarik%20ingin%20bekerja%20sama%20di%20Kamar320", label:"Whatsapp"},
-    {index:2, href:"https://instagram.com/benayajosuaa", label:"Instagram"},
-    {index:3, href:"https://https://www.upwork.com/freelancers/~01df8530f02c3e2b73?mp_source=share.com/benayajosuaa", label:"Upwork"},
-    {index:4, href:"https://www.freelancer.co.id/u/benayajosua?frm=benayajosua&sb=t", label:"Freelancer"},
-]
+        const nomorWhatsapp = "628970052654";
 
+        const pesan = `Halo, saya ${nama} dan saya saat ini sedang menjalani ${bisnis}. Saat ini saya ingin berkonsultasi dengan Kamar320.
 
+        Saat ini, ${keperluan}`;
 
-export default function HomePage(){
+        const encodedPesan = encodeURIComponent(pesan);
 
-    const [navbarTheme, setNavbarTheme] = useState<"light" | "dark">("light");
-    const darkSectionRef = useRef<HTMLDivElement>(null);
+        const whatsappURL = `https://wa.me/${nomorWhatsapp}?text=${encodedPesan}`;
 
-    useEffect(() => {
-    const handleScroll = () => {
-        const rect = darkSectionRef.current?.getBoundingClientRect();
-        if (!rect) return;
-
-        const isDark = rect.top <= 120 && rect.bottom >= 120;
-        setNavbarTheme(isDark ? "dark" : "light");
+        window.open(whatsappURL, "_blank");
     };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-        window.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("resize", handleScroll);
-    };
-    }, []);
-
 
     return (
         <div className={`${quesFont.className} bg-transparent`}>
+            
+            {/* Navbar */}
             <div className="fixed z-30 w-full bg-transparent">
-                <Navbar solid/>
+                <Navbar solid />
             </div>
-            <div>
-                <div className="px-4 py-12 sm:px-8 sm:py-14 md:px-10 lg:px-15 lg:py-15">
-                    <div className="flex flex-col gap-y-5 sm:gap-y-8 lg:gap-y-10">
-                        {/* SECTION JUDUL */}
-                        <div>
-                            <div className="pt-12 pb-5 sm:pt-12 sm:pb-6 md:pt-30 md:pb-5 lg:pt-20 lg:pb-6">
-                                <h1 className="text-3xl font-bold text-[#5F2E6D] sm:text-4xl md:text-[2.7rem] lg:text-4xl">relasi kamar320</h1>
+
+            {/* Section */}
+            <div
+                className="
+                    pt-24 px-5 pb-12
+                    sm:px-6 sm:pt-28 sm:pb-16
+                    md:px-10
+                    lg:pt-30 lg:p-15
+                "
+            >
+                <div>
+                    <div
+                        className="
+                            flex flex-col
+                            lg:flex-row
+                        "
+                    >
+                        {/* Title */}
+                        <div
+                            className="
+                                w-full
+                                lg:basis-4/10
+                            "
+                        >
+                            <div
+                                className="
+                                    flex flex-col
+                                    gap-y-5
+                                    lg:gap-y-10
+                                "
+                            >
+                                <div className={poppins.className}>
+                                    <h1
+                                        className="text-3xl min-[380px]:text-4xl sm:text-5xl font-semibold text-[#4B4B4B] leading-tight"
+                                    >
+                                        Konsultasikan
+                                        <br />
+                                        Keperluanmu!
+                                    </h1>
+                                </div>
+
+                                <div>
+                                    Konsultasi Gratis!
+                                </div>
                             </div>
                         </div>
-                        
-                        {/* SECTION NAVBAR */}
-                        <div className="flex flex-wrap gap-x-2 gap-y-1 pb-2 text-base sm:gap-x-4 sm:gap-y-2 sm:pb-6 sm:text-xl md:text-2xl lg:pb-8">
-                            {
-                                hyperlinkContact.map((x) => {
-                                    return (
-                                        <Link
-                                            key={x.index}
-                                            href={x.href}
-                                            target="blank"
-                                            className="flex flex-row items-center justify-center gap-x-2"
-                                        >
-                                            <span>
-                                                {x.label} 
-                                            </span>
-                                            <span className="text-[#c0c0c0] font-semibold">|</span>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div>
 
-                        {/* section informasi */}
-                        <div className="flex justify-start">
-                            <div className="inline-flex max-w-full bg-amber-200 px-3 py-2 text-[10px] leading-snug text-[#4B4B4B] sm:px-4 sm:text-xs md:text-sm">
-                                <h1>untuk saat ini proses komunikasi hanya bisa di akses melalui whatsapp dan Instagram</h1>
-                            </div>
-                        </div>
-
-                        {/* FORM CONTACT */}
-                        <div className="flex flex-col gap-4 sm:gap-8 md:gap-10 lg:flex-row lg:items-stretch">
-                            {/* BAGIAN_FORM_1 */}
-                            <div className="basis-full px-1 py-2 sm:p-5 md:p-6 lg:basis-3/10 lg:p-0">
-                                <div className="flex h-full flex-col gap-y-6 sm:gap-y-8">
+                        {/* Form */}
+                        <div
+                            className="
+                                w-full
+                                mt-12
+                                sm:mt-16
+                                lg:basis-6/10
+                                lg:mt-30
+                            "
+                        >
+                            <div
+                                className="
+                                    flex flex-col
+                                    w-full
+                                    gap-y-8
+                                    sm:gap-y-10
+                                    lg:gap-y-15
+                                "
+                            >
+                                {/* Nama & Bisnis */}
+                                <div
+                                    className="
+                                        flex flex-col
+                                        gap-y-8
+                                        sm:gap-y-10
+                                        md:flex-row
+                                        md:gap-x-10
+                                        md:gap-y-0
+                                    "
+                                >
                                     {/* Nama */}
-                                    <div className="flex flex-col gap-y-1">
-                                        <span>
-                                            <h1  className="text-base">Nama</h1>
+                                    <div
+                                        className="
+                                            w-full
+                                            md:basis-1/2
+                                            flex flex-col
+                                        "
+                                    >
+                                        <span className={poppins.className}>
+                                            <h1 className="font-semibold opacity-80 text-[#4B4B4B]">
+                                                Nama
+                                            </h1>
                                         </span>
+
                                         <span>
-                                            <input 
-                                                className="w-full border-b border-black px-1 py-2 pr-3 text-base font-medium outline-none sm:pr-5 sm:text-lg md:text-xl"
-                                                type="text" 
-                                                placeholder="Benaya Simamora"
+                                            <input
+                                                type="text"
+                                                name="nama"
+                                                value={nama}
+                                                onChange={(e) =>
+                                                    setNama(e.target.value)
+                                                }
+                                                placeholder="cth. Benaya Joshua"
+                                                className="
+                                                    border-b
+                                                    border-gray-300
+                                                    w-full
+                                                    pb-2
+                                                    pr-2
+                                                    pt-2
+                                                    bg-transparent
+                                                    outline-none
+                                                    transition-colors
+                                                    duration-300
+                                                    focus:border-[#5F2E6D]
+                                                "
                                             />
                                         </span>
                                     </div>
-                                    {/* Email */}
-                                    <div className="flex flex-col gap-y-1">
-                                        <span>
-                                            <h1 className="text-base">Email</h1>
+
+                                    {/* Sektor Bisnis */}
+                                    <div
+                                        className="
+                                            w-full
+                                            md:basis-1/2
+                                            flex flex-col
+                                        "
+                                    >
+                                        <span className={poppins.className}>
+                                            <h1 className="font-semibold opacity-80 text-[#4B4B4B]">
+                                                Jenis Bisnis / Usaha
+                                            </h1>
                                         </span>
+
                                         <span>
-                                            <input 
-                                                className="w-full border-b border-black px-1 py-2 pr-3 text-base font-medium outline-none sm:pr-5 sm:text-lg md:text-xl"
-                                                type="email" 
-                                                placeholder="alamatemail@domain.mu"
-                                            />
-                                        </span>
-                                    </div>
-                                    {/* Phone */}
-                                    <div className="flex flex-col gap-y-1">
-                                        <span>
-                                            <h1 className="text-base">Nomor Telephone</h1>
-                                        </span>
-                                        <span>
-                                            <input 
-                                                className="w-full border-b border-black px-1 py-2 pr-3 text-base font-medium outline-none sm:pr-5 sm:text-lg md:text-xl"
-                                                type="tel" 
-                                                placeholder="+62 897-0052-654"
-                                            />
-                                        </span>
-                                    </div>
-                                    {/* Title */}
-                                    <div className="flex flex-col gap-y-1">
-                                        <span>
-                                            <h1 className="text-base">Keperluan</h1>
-                                        </span>
-                                        <span>
-                                            <input 
-                                                className="w-full border-b border-black px-1 py-2 pr-3 text-base font-medium outline-none sm:pr-5 sm:text-lg md:text-xl"
-                                                type="text" 
-                                                placeholder="Mau buat Landing Page"
+                                            <input
+                                                type="text"
+                                                name="bisnis"
+                                                value={bisnis}
+                                                onChange={(e) =>
+                                                    setBisnis(e.target.value)
+                                                }
+                                                placeholder="cth. Developer Perumahan"
+                                                className="
+                                                    border-b
+                                                    border-gray-300
+                                                    w-full
+                                                    pb-2
+                                                    pr-2
+                                                    pt-2
+                                                    bg-transparent
+                                                    outline-none
+                                                    transition-colors
+                                                    duration-300
+                                                    focus:border-[#5F2E6D]
+                                                "
                                             />
                                         </span>
                                     </div>
                                 </div>
-                            </div>
 
-                            {/* BAGIAN_2_FORM */}
-                            <div className="basis-full px-1 py-2 sm:p-5 md:p-6 lg:basis-7/10 lg:p-0">
-                                <div className="flex h-full flex-col">
-                                    <div className="pb-1 sm:pb-2">
-                                        <h1 className="text-base">Deskripsi Detail</h1>
-                                    </div>
-                                    <div className="w-full flex-1">
+                                {/* Form Masalah */}
+                                <div>
+                                    <span className={poppins.className}>
+                                        <h1 className="font-semibold opacity-80 text-[#4B4B4B]">
+                                            Saya ingin
+                                        </h1>
+                                    </span>
+
+                                    <span>
                                         <textarea
-                                            className="h-full min-h-56 w-full resize-none border border-black px-3 py-3 pr-3 text-base font-medium outline-none sm:min-h-60 sm:px-3 sm:py-3 sm:pr-5 sm:text-lg md:min-h-64 md:text-xl lg:min-h-64"
-                                            placeholder="Mau buat Landing Page dengan ... "
+                                            name="keperluan"
+                                            value={keperluan}
+                                            onChange={(e) =>
+                                                setKeperluan(e.target.value)
+                                            }
+                                            className="
+                                                border-b
+                                                border-gray-300
+                                                w-full
+                                                h-44
+                                                md:h-52
+                                                lg:h-60
+                                                pt-2
+                                                pr-2
+                                                resize-none
+                                                bg-transparent
+                                                outline-none
+                                                transition-colors
+                                                duration-300
+                                                focus:border-[#5F2E6D]
+                                            "
+                                            placeholder="Saya ingin dibuatin website company profile dengan ...."
                                         />
-                                    </div>
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
 
+                                {/* Button */}
+                                <div className="pt-5 lg:pt-14 lg:pb-30 flex flex-col items-stretch sm:items-end sm:pr-0 lg:pr-20 w-full">
+                                    <button
+                                        type="button"
+                                        onClick={handleKonsultasi}
+                                        className="
+                                            border
+                                            border-[#4E245A]
+                                            rounded-xl
+                                            inline-flex
+                                            items-center
+                                            justify-center
+                                            px-6
+                                            py-3
+                                            text-white
+                                            bg-[#4E245A]
+                                            transition-all
+                                            duration-300
+                                            hover:-translate-y-1
+                                            hover:shadow-lg
+                                            hover:bg-[#5F2E6D]
+                                            active:translate-y-0
+                                            
+                                            w-full
+                                            sm:w-auto
+                                        "
+                                    >
+                                        <span className="flex flex-row items-center gap-x-2 text-sm">
+                                            <span>
+                                                Konsultasi Sekarang
+                                            </span>
 
-                        {/* BUTTON */}
-                        <div className="pt-0 sm:pt-0">
-                            <div className="flex items-center justify-stretch sm:justify-end">
-                                <button className="w-full rounded-lg border border-black bg-[#dadada] px-5 py-3.5 text-base sm:w-auto sm:px-8 sm:py-2.5 sm:text-lg md:text-xl">
-                                    kirim pesan
-                                </button>
-                            </div>
-                        </div>
-
-
-                        {/* PEMBERITAHUAN */}
-                        <div className="flex flex-col gap-y-2 pt-1 sm:gap-y-3 sm:pt-0">
-                            <div>
-                                <h1 className="text-2xl sm:text-3xl">Perhatian!</h1>
-                            </div>
-                            <div className="flex text-sm sm:text-sm">
-                                <p className="w-full leading-relaxed md:max-w-[75%] lg:basis-3/5">
-                                    Kamar320 mengimbau untuk berhati-hati terhadap segala bentuk informasi palsu, 
-                                    akun tiruan, maupun nomor yang mengatasnamakan pihak Kamar320. 
-                                    Seluruh komunikasi resmi hanya dilakukan melalui kontak dan kanal 
-                                    yang telah dicantumkan secara resmi oleh Kamar320, 
-                                    termasuk nomor telepon resmi: +62 897-0052-654. 
-                                    Kami tidak pernah meminta password, kode OTP, ataupun data pribadi sensitif melalui 
-                                    chat pribadi maupun pihak ketiga. Jika menemukan aktivitas mencurigakan atau 
-                                    informasi yang diragukan kebenarannya, harap segera melakukan verifikasi melalui kontak resmi Kamar320.
-                                </p>
+                                            <span>
+                                                <GoArrowRight />
+                                            </span>
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
-            <div ref={darkSectionRef} className="relative z-20">
-                <Footer/>
+
+            {/* Link Ke Find Us */}
+            <div>
+                <div className="px-5 py-12 sm:p-10 md:p-14 lg:p-20 lg:pt-10 lg:pb-30">
+                    <Link href="/find-us" className="flex flex-row items-start gap-x-2 text-lg sm:text-xl md:text-2xl text-[#4B4B4B] opacity-50 hover:opacity-80">
+                        <span className="font-sembibold shrink-0 pt-1">
+                            <GoArrowLeft />
+                        </span>
+                        <span className={`${poppins.className} leading-snug`}>
+                            Lihat Kami Ada Dimana Saja
+                        </span>
+                    </Link>
+                </div>
+            </div>
+
+            {/* Footer */}
+            <div className="relative z-20">
+                <Footer />
             </div>
         </div>
-    )
+    );
 }
