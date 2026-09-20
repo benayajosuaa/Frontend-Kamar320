@@ -18,16 +18,15 @@ const questerial = Questrial({
 
 
 const layananKami = [
-    {index:"1", name:"Tentang Kami", link:"/tentang-kami"},
-    {index:"2", name:"Dibalik Layar", link:"/benaya-joshua"},
+    {index:"1", name:"Tentang Kami", link:"/about-us"},
+    {index:"2", name:"Pelayanan Kami", link:"/services"},
+    {index:"3", name:"Aktivitas Kami", link:"/activity"},
+    {index:"4", name:"Dibalik Layar", link:"/benaya-joshua"},
 ]
 
 const temukankamar = [
-    {index:"1", name:"Instagram", link:"/tentang-kami"},
-    {index:"2", name:"Whatsapp", link:"/benaya-joshua"},
-    {index:"3", name:"Upwork", link:"/benaya-joshua"},
-    {index:"4", name:"Fiverr", link:"/benaya-joshua"},
-    {index:"5", name:"Freelancer", link:"/benaya-joshua"},
+    {index:"1", name:"Platfrom Freelance", link:"/find-us"},
+    {index:"2", name:"Komunikasi Langsung", link:"/contact"},
 ]
 
 
@@ -83,7 +82,7 @@ export default function FooterBar(){
                                     <div>
                                         {/* judul */}
                                         <div className={poppins.className}>
-                                            <h1 className="text-base font-medium text-white mb-5 opacity-70">kami berada di </h1>
+                                            <h1 className="text-base font-medium text-white mb-5 opacity-70">hubungi kami melalui </h1>
                                         </div>
                                         {/* link */}
                                         <div className="flex flex-col gap-y-1">
