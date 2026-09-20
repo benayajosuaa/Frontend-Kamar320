@@ -48,19 +48,19 @@ const linkNav = [
                 desc: "penawaran yang bisa kami berikan untuk kamu",
             },
             {
-                label: "Benaya Joshua",
-                href: "/benaya-joshua",
-                desc: "lihat sekilas terkait orang pertama yang ada di balik kamar320",
-            },
-            {
                 label: "Pernyataan Kami",
                 href: "/under-development",
                 desc: "ini pernyataan yang kami berikan untuk kamu agar kamu paham mengenai kami",
             },
             {
                 label: "Design Kami",
-                href: "/under-development",
+                href: "/design-kamar",
                 desc: "cerita-cerita yang ada dibalik design kami",
+            },
+            {
+                label: "Benaya Joshua",
+                href: "/benaya-joshua",
+                desc: "lihat sekilas terkait orang pertama yang ada di balik kamar320",
             },
         ],
     },
@@ -76,7 +76,7 @@ const linkNav = [
             },
             {
                 label: "Kami Ada di Tempat Lain",
-                href: "/under-development",
+                href: "/find-us",
                 desc: "kamar320 juga berada di platfrom-platfrom lain",
             },
         ],
@@ -91,6 +91,7 @@ export default function NavigationBar ({ solid = false }: NavigationBarProps){
     const router = useRouter();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isNavbarHovered, setIsNavbarHovered] = useState(false);
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
     const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -135,7 +136,12 @@ export default function NavigationBar ({ solid = false }: NavigationBarProps){
         setActiveMenu(null);
     };
 
-    const isSolidNavbar = solid || isScrolled || isMenuOpen;
+    const handleNavbarMouseLeave = () => {
+        setIsNavbarHovered(false);
+        closeMenu();
+    };
+
+    const isSolidNavbar = solid || isScrolled || isMenuOpen || isNavbarHovered;
 
     const logoSrc = isSolidNavbar
         ? "/logo-optimal/kamar320.webp"
@@ -149,6 +155,8 @@ export default function NavigationBar ({ solid = false }: NavigationBarProps){
 
     return (
         <header
+            onMouseEnter={() => setIsNavbarHovered(true)}
+            onMouseLeave={handleNavbarMouseLeave}
             className={[
                 quesFont.className,
                 "fixed left-0 top-0 z-50 w-full transition-all duration-300 ease-out",
@@ -156,7 +164,7 @@ export default function NavigationBar ({ solid = false }: NavigationBarProps){
             ].join(" ")}
         >
             {/* Desktop */}
-            <div className="hidden md:block" onMouseLeave={closeMenu}>
+            <div className="hidden md:block">
                 <div>
                     <div className={`flex flex-row justify-between px-15 py-4 transition-colors duration-300 lg:px-15 items-center ${textColor}`}>
                         <div>
