@@ -1,21 +1,17 @@
 "use client"
 import Navbar from "../../../components/navbar-baru"
 import Footer from "../../../components/footer-baru"
+import { IoMdArrowForward } from "react-icons/io";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { motion, Variants } from "motion/react";
 
-import { Questrial } from "next/font/google";
-
-const quesFont = Questrial({
-  subsets: ["latin"],
-  weight: "400",
-});
-
+import { poppins, quesFont } from "@/lib/font";
 
 const listWork = [
     {   
         index:1,
-        title:"Company Profile - CV Terang Berkat Mandiri",
+        title:"Static Company Profile - CV Terang Berkat Mandiri",
         gambar:"work/tbm.png",
         link_demo:"https://terang-berkat-mandiri.vercel.app",
         magazine:"/under-development",
@@ -46,6 +42,39 @@ const listWork = [
         type:"Website"
     },
 ]
+
+const titleVariants: Variants = {
+    hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
+    visible: {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+    },
+};
+
+const workItemVariants: Variants = {
+    hidden: { opacity: 0, y: 54 },
+    visible: (index: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.8,
+            delay: Math.min(index * 0.08, 0.24),
+            ease: [0.22, 1, 0.36, 1],
+        },
+    }),
+};
+
+const imageVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.96, y: 24 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    },
+};
 
 
 export default function HomePage(){
@@ -80,68 +109,110 @@ export default function HomePage(){
                 </div>
 
 
-                <div className="px-4 py-12 sm:px-8 sm:py-14 md:px-10 lg:p-15">
-                    <div className="flex flex-col">
-                        {/* Judul */}
-                        <div>
-                            <div className="pt-14 pb-8 sm:pt-20 sm:pb-10 md:pt-28 md:pb-12 lg:pt-20 lg:pb-0">
-                                <h1 className="max-w-4xl text-3xl font-bold leading-tight text-[#5F2E6D] sm:text-4xl md:text-[2.7rem] lg:text-4xl">yang sudah dikerjakan kamar320</h1>
+                <div className="pt-10 pb-20 max-lg:pt-16 max-md:pb-12">
+                    {/* judul */}
+                    <div className="">
+                        <div className="p-15 max-lg:px-8 max-lg:py-12 max-md:px-5 max-md:py-9">
+                            <div className="">
+                                <span className={poppins.className}>
+                                    <motion.h1
+                                        variants={titleVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        className="text-5xl font-semibold text-[#5F2E6D] max-lg:text-4xl max-md:text-3xl"
+                                    >
+                                        kerjaan kami
+                                    </motion.h1>
+                                </span>
                             </div>
                         </div>
-                        {/* Section */}
-                        <div className="pt-10 flex flex-col gap-y-10 sm:gap-y-12 lg:gap-y-8">
+                    </div>
+                    {/* section */}
+                    <div className="p-10 max-lg:px-8 max-lg:py-4 max-md:px-5">
+                        <div className="">
                             {
-                                listWork.map((x) => {
-                                    return (
-                                        <div key={x.index} className="flex flex-col gap-y-7 sm:gap-y-7 lg:gap-y-7">
-                                            <div className="border-b border-[#d0d0d0] pb-8 sm:pb-10 lg:pb-8">
-                                                <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-8 lg:gap-x-0">
-                                                    <div className="flex w-full md:basis-4/10 lg:basis-4/10">
-                                                        <div className="flex aspect-16/10 w-full overflow-hidden bg-amber-300 md:h-44 lg:h-40 lg:w-80 lg:aspect-auto">
-                                                            <img 
-                                                                className="h-full w-full border border-gray-200 object-cover object-[center_0%] lg:h-40 lg:w-80"
-                                                                src={x.gambar} alt="" 
-                                                            />
+                                listWork.map((x, itemIndex) => {
+                                    return(
+                                        <motion.div
+                                            key={x.index}
+                                            custom={itemIndex}
+                                            variants={workItemVariants}
+                                            initial="hidden"
+                                            whileInView="visible"
+                                            viewport={{ once: true, amount: 0.25, margin: "0px 0px -12% 0px" }}
+                                            className="group p-10 pb-10 border-t max-lg:px-0 max-lg:py-8 max-md:py-7"
+                                        >
+                                            <div className="flex flex-row gap-x-10 max-lg:flex-col max-lg:gap-y-6">
+                                                <div className="basis-4/10 h-full max-lg:basis-auto">
+                                                    <div className="flex flex-col justify-between h-100 max-lg:h-auto max-lg:gap-6">
+                                                        {/* Judul */}
+                                                        <div>
+                                                            <h1 className="text-4xl text-[#4B4B4B] transition-colors duration-500 group-hover:text-[#5F2E6D] max-lg:max-w-3xl max-lg:text-3xl max-md:text-2xl">
+                                                                {x.title}
+                                                            </h1>
                                                         </div>
-                                                    </div>
-                                                    <div className="flex w-full md:basis-6/10 lg:basis-6/10">
-                                                        <div className="flex w-full flex-col justify-between gap-y-5 md:min-h-44 lg:min-h-0 lg:gap-y-0">
+                                                        {/* Link Slug */}
+                                                        <div>
                                                             <div>
-                                                                <h1 className="text-2xl font-semibold leading-tight sm:text-3xl md:text-2xl lg:text-2xl">
-                                                                    {x.title}
-                                                                </h1>
-                                                            </div>
-                                                            <div  className="flex flex-wrap items-center gap-x-2 md:gap-x-5 gap-y-2 lg:flex-nowrap">
-                                                                <div>
-                                                                    <h1 className="text-base font-semibold sm:text-lg">
-                                                                        {x.type}
-                                                                    </h1>
-                                                                </div>
-                                                                <span className="font-extrabold text-[#d0d0d0]"> | </span>
-                                                                <div className="text-base font-semibold underline-offset-4 hover:underline sm:text-lg">
-                                                                    <Link target="blank" href={x.magazine}>
-                                                                        Majalah Project
-                                                                    </Link>
-                                                                </div>
-                                                                <span className="font-extrabold text-[#d0d0d0]"> | </span>
-                                                                <div className="text-base font-semibold underline-offset-4 hover:underline sm:text-lg"> 
-                                                                    <Link target="blank" href={x.link_demo}>
-                                                                        Demo Project
-                                                                    </Link>
-                                                                </div>
+                                                                <button
+                                                                    type="button"
+                                                                    className="
+                                                                        group inline-flex items-center gap-3
+                                                                        rounded-xl border border-[#4B4B4B]/25
+                                                                        bg-white px-5 py-1
+                                                                        text-[#4B4B4B]
+                                                                        transition-all duration-300 ease-out
+                                                                        hover:-translate-y-0.5 hover:border-[#5F2E6D]
+                                                                        hover:bg-[#5F2E6D] hover:text-white
+                                                                        active:translate-y-0 active:scale-95
+                                                                        focus-visible:outline-none
+                                                                        focus-visible:ring-4 focus-visible:ring-[#5F2E6D]/25
+                                                                        motion-reduce:transform-none motion-reduce:transition-none
+                                                                        max-md:px-4 max-md:py-1.5
+                                                                    "
+                                                                    >
+                                                                    <span className="font-medium">Lihat Detailnya</span>
+
+                                                                    <span
+                                                                        className="
+                                                                        flex size-8 items-center justify-center rounded-full
+                                                                        transition-colors duration-300
+                                                                        "
+                                                                    >
+                                                                        <IoMdArrowForward
+                                                                        className="
+                                                                            transition-transform duration-300 ease-out
+                                                                            group-hover:translate-x-1
+                                                                        "
+                                                                        />
+                                                                    </span>
+                                                                    </button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div className="basis-6/10 max-lg:basis-auto">
+                                                    <motion.div
+                                                        variants={imageVariants}
+                                                        className="w-auto h-100 overflow-hidden rounded-lg border max-lg:h-105 max-md:h-65"
+                                                    >
+                                                        {/* nanti image buat object cover */}
+                                                        <img
+                                                            className="object-cover w-full h-100 rounded-lg object-[center_0%] transition-transform duration-700 ease-out group-hover:scale-[1.035] max-lg:h-full"
+                                                            src={x.gambar}
+                                                            alt={x.title}
+                                                        />
+                                                    </motion.div>
+                                                </div>
                                             </div>
-                                            
-                                        </div>
+                                        </motion.div>
                                     )
                                 })
                             }
                         </div>
                     </div>
                 </div>
+
                         
                 <div ref={darkSectionRef} className="">
                     <Footer/>
