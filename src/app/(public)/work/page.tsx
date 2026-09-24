@@ -11,6 +11,14 @@ import { poppins, quesFont } from "@/lib/font";
 const listWork = [
     {   
         index:1,
+        title:"Manten Wedding Organizer - Content Management Systems",
+        gambar:"work/covermanten.webp",
+        link_demo:"https://manten.kamar320.com",
+        magazine:"/under-development",
+        type:"Website"
+    },
+    {   
+        index:2,
         title:"Static Company Profile - CV Terang Berkat Mandiri",
         gambar:"work/tbm.png",
         link_demo:"https://terang-berkat-mandiri.vercel.app",
@@ -18,7 +26,7 @@ const listWork = [
         type:"Website"
     },
     {   
-        index:2,
+        index:3,
         title:"Photoscape - Online Booking Studio",
         gambar:"work/photoscape.png",
         link_demo:"https://photoscape-frontend.vercel.app/",
@@ -26,7 +34,7 @@ const listWork = [
         type:"Website"
     },
     {
-        index:3,
+        index:4,
         title:"Personal Portfolio",
         gambar:"work/haloben.png",
         link_demo:"https://www.halobenaya.com/",
@@ -34,7 +42,7 @@ const listWork = [
         type:"Website"
     },
     {
-        index:4,
+        index:5,
         title:"Vector Database for Recipe",
         gambar:"work/sbd.png",
         link_demo:"/under-development",
