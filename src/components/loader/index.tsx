@@ -11,11 +11,12 @@ const quesFont = Questrial({
 
 const loader_words = [
   "Belajar",
-  "Live Tiktok",
+  "Drakor",
   "Tidur",
-  "w: kamar320.com",
-  "i: @inside.kamar320",
-  "w: +62 897-0052-654",
+  "Kerja",
+  "website: kamar320.com",
+  "insta: @inside.kamar320",
+  "wa: +62 897-0052-654",
 ]
 
 const slideDuration = 1200
