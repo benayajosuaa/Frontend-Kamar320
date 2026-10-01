@@ -91,6 +91,12 @@ const nextConfig: NextConfig = {
           "https://canva.link/1fqko9vodtsu28p",
         permanent: false,
       },
+      {
+        source: "sos",
+        destination:
+          "https://drive.google.com/drive/folders/1V_FahYIcldsy-9SzhIAktQTLLMwnDC3p?usp=sharing",
+        permanent: false,
+      },
     ];
   },
 };
