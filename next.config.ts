@@ -92,7 +92,7 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        source: "sos",
+        source: "/sos",
         destination:
           "https://drive.google.com/drive/folders/1V_FahYIcldsy-9SzhIAktQTLLMwnDC3p?usp=sharing",
         permanent: false,
