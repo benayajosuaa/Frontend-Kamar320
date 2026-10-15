@@ -46,7 +46,7 @@ export default function OurTechStack (){
                 <div className="flex flex-col gap-y-10 max-lg:gap-y-8 max-sm:gap-y-6">
                     <div className={styles.reveal}>
                         <div className={poppins.className}>
-                            <h1 className="text-3xl font-[#4B4B4B] max-lg:text-2xl max-sm:text-xl max-lg:leading-snug">orang kamar menggunakan ini <br className="max-sm:hidden"/> untuk memenuhi kebutuhan mu</h1>
+                            <h1 className="text-3xl font-[#4B4B4B] max-lg:text-2xl max-sm:text-xl max-lg:leading-snug">yang kami pakai di dalam kamar, <br className="max-sm:hidden"/>untuk mewujudkan ide di luar sana.</h1>
                         </div>
                     </div>
 
