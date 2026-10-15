@@ -7,6 +7,9 @@ import Link from "next/link";
 import { IoIosArrowRoundForward } from "react-icons/io"; 
 import { poppins, quesFont } from "@/lib/font";
 import TentangKamar from "@/components/about-kamar";
+import OurStack from "@/components/our-tech";
+
+
 
 const handleAnimationComplete = () => {
   console.log('Animation completed!');
@@ -427,6 +430,13 @@ export default function HomePage() {
             <div ref={heroSectionRef} className="bg-[#5F2E6D]">
                 <div  className="">
                     <TentangKamar />
+                </div>
+            </div>
+
+            {/* SECTION: ... */}
+            <div ref={heroSectionRef} className="bg-[#ffffff]">
+                <div className="pt-20">
+                    <OurStack />
                 </div>
             </div>
 
