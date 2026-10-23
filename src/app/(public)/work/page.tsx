@@ -11,6 +11,14 @@ import { poppins, quesFont } from "@/lib/font";
 const listWork = [
     {   
         index:1,
+        title:"Matchain - Landing page for Matcha Store",
+        gambar:"work/matchain.png",
+        link_demo:"https://matchain.kamar320.com",
+        magazine:"/under-development",
+        type:"Website"
+    },
+    {   
+        index:2,
         title:"Manten Wedding Organizer - Content Management Systems",
         gambar:"work/covermanten.webp",
         link_demo:"https://manten.kamar320.com",
@@ -18,7 +26,7 @@ const listWork = [
         type:"Website"
     },
     {   
-        index:2,
+        index:3,
         title:"Static Company Profile - CV Terang Berkat Mandiri",
         gambar:"work/tbm.png",
         link_demo:"https://terang-berkat-mandiri.vercel.app",
@@ -26,7 +34,7 @@ const listWork = [
         type:"Website"
     },
     {   
-        index:3,
+        index:4,
         title:"Photoscape - Online Booking Studio",
         gambar:"work/photoscape.png",
         link_demo:"https://photoscape-frontend.vercel.app/",
@@ -34,7 +42,7 @@ const listWork = [
         type:"Website"
     },
     {
-        index:4,
+        index:5,
         title:"Personal Portfolio",
         gambar:"work/haloben.png",
         link_demo:"https://www.halobenaya.com/",
@@ -42,7 +50,7 @@ const listWork = [
         type:"Website"
     },
     {
-        index:5,
+        index:6,
         title:"Vector Database for Recipe",
         gambar:"work/sbd.png",
         link_demo:"/under-development",
@@ -148,10 +156,10 @@ export default function HomePage(){
                                             initial="hidden"
                                             whileInView="visible"
                                             viewport={{ once: true, amount: 0.25, margin: "0px 0px -12% 0px" }}
-                                            className="group p-10 pb-10 border-t max-lg:px-0 max-lg:py-8 max-md:py-7"
+                                            className="group p-10 pb-20  pt-20 border-t max-lg:px-0 max-lg:py-8 max-md:py-7"
                                         >
                                             <div className="flex flex-row gap-x-10 max-lg:flex-col max-lg:gap-y-6">
-                                                <div className="basis-4/10 h-full max-lg:basis-auto">
+                                                <div className="basis-3/10 h-full max-lg:basis-auto">
                                                     <div className="flex flex-col justify-between h-100 max-lg:h-auto max-lg:gap-6">
                                                         {/* Judul */}
                                                         <div>
@@ -184,8 +192,7 @@ export default function HomePage(){
                                                                     <span
                                                                         className="
                                                                         flex size-8 items-center justify-center rounded-full
-                                                                        transition-colors duration-300
-                                                                        "
+                                                                        transition-colors duration-300"
                                                                     >
                                                                         <IoMdArrowForward
                                                                         className="
@@ -199,14 +206,14 @@ export default function HomePage(){
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="basis-6/10 max-lg:basis-auto">
+                                                <div className="basis-7/10 max-lg:basis-auto">
                                                     <motion.div
                                                         variants={imageVariants}
-                                                        className="w-auto h-100 overflow-hidden rounded-lg border max-lg:h-105 max-md:h-65"
+                                                        className="w-auto h-120 overflow-hidden rounded-lg border max-lg:h-105 max-md:h-65"
                                                     >
                                                         {/* nanti image buat object cover */}
                                                         <img
-                                                            className="object-cover w-full h-100 rounded-lg object-[center_0%] transition-transform duration-700 ease-out group-hover:scale-[1.035] max-lg:h-full"
+                                                            className="object-cover w-full h-120 rounded-lg object-[center_0%] transition-transform duration-700 ease-out group-hover:scale-[1.035] max-lg:h-full"
                                                             src={x.gambar}
                                                             alt={x.title}
                                                         />
