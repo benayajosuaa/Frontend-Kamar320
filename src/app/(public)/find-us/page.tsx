@@ -35,6 +35,20 @@ const tempatKami = [
       "Temukan profil dan layanan freelance kami melalui Freelancer.",
     link: "https://www.freelancer.co.id/u/benayajosua?frm=benayajosua&sb=t",
   },
+  {
+    id: "5",
+    nama: "Himalayas",
+    penjelasan:
+      "Biodata kami di himalayas.",
+    link: "https://himalayas.app/@benayasimamora",
+  },
+  {
+    id: "6",
+    nama: "Contra",
+    penjelasan:
+      "Kami sekarang ada di contra!",
+    link: "https://contra.com/kamar_320/work?r=benaya_simamora_pgqd20m7",
+  },
 ];
 
 export default function FindUs() {
